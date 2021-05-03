@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "ingreso-gasto-app-6f4f9": {
+      "hosting": {
+        "ingresoGastoApp": [
+          "ingreso-gasto-app-6f4f9"
+        ]
+      }
+    }
+  }
+}
