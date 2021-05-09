@@ -3,17 +3,17 @@ import { Usuario } from '../models/usuario.model';
 import { setUser, unSetUser } from './auth.actions';
 
 export interface State {
-    user: Usuario,
+    user: Usuario | null,
 }
 
 export const initialState: State = {
-  user: { uid: '', nombre: '', email: '' }
+  user: null
 }
 
 const _authReducer = createReducer<State, Action>(initialState,
 
     on(setUser, (state, { user }) => ({ ...state, user: { ...user } })),
-    on(unSetUser, (state) => ({ ...state, user: { uid: '', nombre: '', email: '' } })),
+    on(unSetUser, (state) => ({ ...state, user: null })),
 
 );
 

@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
 
+import { ChartsModule } from 'ng2-charts';
+
 import { environment } from '../environments/environment';
 
 import { StoreModule } from '@ngrx/store';
@@ -24,6 +26,7 @@ import { DetalleComponent } from './ingreso-gasto/detalle/detalle.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { SidebarComponent } from './shared/sidebar/sidebar.component';
+import { OrdenIngresoPipe } from './pipes/orden-ingreso.pipe';
 
 @NgModule({
   declarations: [
@@ -36,12 +39,14 @@ import { SidebarComponent } from './shared/sidebar/sidebar.component';
     DetalleComponent,
     FooterComponent,
     NavbarComponent,
-    SidebarComponent
+    SidebarComponent,
+    OrdenIngresoPipe
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
+    ChartsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AngularFireAuthModule,

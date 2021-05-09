@@ -6,9 +6,11 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Store } from '@ngrx/store';
 import { AppState } from '../app.reducer';
 import * as authActions from '../auth/auth.actions';
+import * as ingresoGastoActions from '../ingreso-gasto/ingreso-gasto.actions';
 
 import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
+
 import { Usuario } from '../models/usuario.model';
 
 @Injectable({
@@ -17,6 +19,11 @@ import { Usuario } from '../models/usuario.model';
 export class AuthService {
 
   userSubscription: Subscription = new Subscription;
+  private _user: Usuario | null = null;
+
+  get user() {
+    return this._user;
+  }
 
   constructor( public auth: AngularFireAuth,
                private firestore: AngularFirestore,
@@ -24,18 +31,20 @@ export class AuthService {
 
   initAuthListener() {
     this.auth.authState.subscribe( fuser => {
-      // console.log( fuser?.uid );
       if ( fuser ) {
         // existe el ususario
         this.userSubscription = this.firestore.doc(`${ fuser.uid }/usuario`).valueChanges()
           .subscribe( (firestoreUser: any) => {
             const user = Usuario.fromFirebase( firestoreUser );
+            this._user = user;
             this.store.dispatch( authActions.setUser( { user } ) );
           });
       } else {
         // no existe el usuario
+        this._user = null;
         this.userSubscription.unsubscribe();
         this.store.dispatch( authActions.unSetUser() );
+        this.store.dispatch( ingresoGastoActions.unSetItems() );
       }
     });
   }
