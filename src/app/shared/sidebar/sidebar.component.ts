@@ -41,19 +41,21 @@ export class SidebarComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.userSubs.unsubscribe();
+    this.userSubs?.unsubscribe();
   }
 
   logout() {
-    this.authService.logout().then(() => {
-      this.router.navigate(['/login'])
-    }).catch((err) => {
-      Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: err.message
+    this.authService.logout()
+      .then( () => {
+        this.router.navigate(['/login'])
       })
-    });;
+      .catch( (err) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: err.message
+        })
+      });
   }
 
 }

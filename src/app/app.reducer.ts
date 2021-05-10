@@ -7,12 +7,12 @@ import * as ingresoGasto from './ingreso-gasto/ingreso-gasto.reducer';
 export interface AppState {
    ui: ui.State,
    user: auth.State,
-   ingresosGastos: ingresoGasto.State
+   // ingresosGastos: ingresoGasto.State
 }
 
 
 export const AppReducers: ActionReducerMap<AppState> = {
    ui: ui.uiReducer,
    user: auth.authReducer,
-   ingresosGastos: ingresoGasto.ingresoGastoReducer,
+   // ingresosGastos: ingresoGasto.ingresoGastoReducer,
 }

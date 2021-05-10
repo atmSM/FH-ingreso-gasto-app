@@ -3,7 +3,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { Store } from '@ngrx/store';
-import { AppState } from '../../app.reducer';
+import { AppStateWithIngresoGasto } from '../ingreso-gasto.reducer';
 
 import { IngresoGasto } from '../../models/ingreso-gasto.model';
 import { IngresoGastoService } from '../../services/ingreso-gasto.service';
@@ -21,7 +21,7 @@ export class DetalleComponent implements OnInit, OnDestroy {
   ingresosGastos: IngresoGasto[] = [];
   detalleSubs: Subscription;
 
-  constructor( private store: Store<AppState>,
+  constructor( private store: Store<AppStateWithIngresoGasto>,
                private ingresoGastoService: IngresoGastoService ) { 
     this.detalleSubs = this.store.select('ingresosGastos').subscribe( ({ items }) => this.ingresosGastos = items );
   }

@@ -66,6 +66,5 @@ export class IngresoGastoComponent implements OnInit, OnDestroy {
         Swal.fire( 'Error', err.message, 'error');
       } );
   }
-
-
+  
 }
